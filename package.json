@@ -1,8 +1,8 @@
 {
-  "name": "next-firebase-starter",
+  "name": "django-juice",
   "private": true,
   "version": "1.0.0",
-  "author": "Trinity Christiana",
+  "author": "Team Django Juice",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
