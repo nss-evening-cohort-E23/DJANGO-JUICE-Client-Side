@@ -2,7 +2,7 @@
   "name": "django-juice",
   "private": true,
   "version": "1.0.0",
-  "author": "Stacey Vanyo",
+  "author": "Team Django Juice",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
