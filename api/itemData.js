@@ -2,101 +2,63 @@ import { clientCredentials } from '../utils/client';
 
 const endpoint = clientCredentials.databaseURL;
 
-const getItems = (uid) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/item.json?orderBy="uid"&equalTo="${uid}"`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => resolve(Object.values(data)))
-    .catch(reject);
-});
+const getItems = (uid) => fetch(`${endpoint}/item.json?orderBy="uid"&equalTo="${uid}"`, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+  .then((response) => response.json())
+  .then((data) => Object.values(data))
+  .catch((error) => {
+    throw error;
+  });
 
-const deleteSingleItem = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/item/${firebaseKey}.json`, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => resolve((data)))
-    .catch(reject);
-});
+const deleteSingleItem = (firebaseKey) => fetch(`${endpoint}/item/${firebaseKey}.json`, {
+  method: 'DELETE',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+  .then((response) => response.json())
+  .then((data) => data)
+  .catch((error) => {
+    throw error;
+  });
 
-const getSingleItem = (firebaseKey) => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/item/${firebaseKey}.json`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => resolve(data))
-    .catch(reject);
-});
+const getSingleItem = (firebaseKey) => fetch(`${endpoint}/item/${firebaseKey}.json`, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+})
+  .then((response) => response.json())
+  .then((data) => data)
+  .catch((error) => {
+    throw error;
+  });
 
-// const createMember = (payload) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/member.json`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(payload),
-//   })
-//     .then((response) => response.json())
-//     .then((data) => resolve(data))
-//     .catch(reject);
-// });
+const getOrderItems = async (itemFirebaseKey) => {
+  // eslint-disable-next-line no-useless-catch
+  try {
+    const orderItems = await getItems(); // Call the getItems function to get the list of order items
+    const matchingKeys = [];
 
-// const updateMember = (payload) => new Promise((resolve, reject) => {
-//   fetch(`${endpoint}/member/${payload.firebaseKey}.json`, {
-//     method: 'PATCH',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify(payload),
-//   })
-//     .then((response) => response.json())
-//     .then((data) => resolve(data))
-//     .catch(reject);
-// });
-
-const getOrderItems = async (memberFirebaseKey) => new Promise((resolve, reject) => {
-  let orderItems = ''; getOrderItems()
-    .then((orderItems) => {
-      teams.forEach((team) => {
-        if ([orderItems.roster].includes(memberFirebaseKey)) {
-          memberTeam = team.firebaseKey;
-        }
-      });
-      resolve(memberTeam);
-    })
-    .catch((error) => {
-      reject(error);
+    orderItems.forEach((order) => {
+      if (order.item && order.item.includes(itemFirebaseKey)) {
+        matchingKeys.push(order.item.firebaseKey);
+      }
     });
-});
 
-// const getMemberByTeam = async (playerFirebaseKey) => {
-//   let memberTeam = '';
-//   await getTeams()
-//     .then((teams) => {
-//       teams.forEach((team) => {
-//         if ([team.roster].includes(playerFirebaseKey)) {
-//           memberTeam = team.firebaseKey;
-//         }
-//       });
-//     });
-//   return memberTeam;
-// };
+    return matchingKeys;
+  } catch (error) {
+    throw error;
+  }
+};
 
 export {
   getItems,
-  createMember,
-  deleteSingleMember,
-  getSingleMember,
-  updateMember,
-  getMemberByTeam,
+  deleteSingleItem,
+  getSingleItem,
+  getOrderItems,
 };
