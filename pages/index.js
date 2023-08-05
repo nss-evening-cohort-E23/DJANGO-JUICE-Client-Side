@@ -1,4 +1,5 @@
 import { Button } from 'react-bootstrap';
+import Link from 'next/link';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 
@@ -20,6 +21,13 @@ function Home() {
       <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
         Sign Out
       </Button>
+      <h1>Hello {user.displayName}! </h1>
+      <Link passHref href="/registration">
+        Don&apos;t have an account? Click here to sign up!
+      </Link>
+      <Link passHref href="/registration">
+        Don&apos;t have an account? Click here to sign up!
+      </Link>
     </div>
   );
 }
