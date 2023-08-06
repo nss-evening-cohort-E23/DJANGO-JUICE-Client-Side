@@ -1,5 +1,5 @@
 import { React, useState } from 'react';
-import { Form, FloatingLabel } from 'react-bootstrap';
+import { Form, FloatingLabel, Button } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 // import { useAuth } from '../utils/context/authContext';
 
@@ -92,6 +92,9 @@ function UserForm() {
             required
           />
         </FloatingLabel>
+
+        {/* SUBMIT BUTTON  */}
+        <Button type="submit">Submit</Button>
       </Form>
     </>
   );
