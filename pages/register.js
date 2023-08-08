@@ -1,16 +1,26 @@
 import React from 'react';
+// import { useRouter } from 'next/router';
+import RegisterForm from '../components/RegisterForm';
 // import { useAuth } from '../utils/context/authContext';
-import UserForm from '../components/UserForm';
+// import { Button } from 'react-bootstrap';
 
-function Registration() {
-  // const [users, setUsers] = useState([]);
+function RegisterUser() {
   // const { user } = useAuth();
+  // const router = useRouter();
 
+  // const register = () => {
+  //   router.push('/');
+  // };
+
+  // if (user) {
+  //   console.warn('user already exists');
+  //   return (
+  //     <button type="button" onClick={register}>Continue to Account Home</button>
+  //   );
+  // }
   return (
-    <div>
-      <UserForm />
-    </div>
+    <div><RegisterForm /></div>
   );
 }
 
-export default Registration;
+export default RegisterUser;

@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Nav } from 'react-bootstrap';
 import Link from 'next/link';
+// import { useRouter } from 'next/router';
 import { signIn } from '../utils/auth';
+// import RegisterUser from '../pages/register';
 
 function Signin() {
   return (
@@ -25,8 +27,12 @@ function Signin() {
       </Button>
 
       <Link passHref href="/register" className="link">
-        <u>Don&apos;t have an account? Click here to sign up!</u>
+        <Nav.Link>Don&apos;t have an account? Click here to sign up!</Nav.Link>
       </Link>
+
+      {/* <Button type="button" size="lg" className="copy-btn" onClick={registerUser}>
+        Don&apos;t have an account? Click here to sign up!
+      </Button> */}
     </div>
   );
 }
