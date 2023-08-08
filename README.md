@@ -1,3 +1,10 @@
+**[Link to Figma wireframe](https://www.figma.com/file/2aJtGsPcxDFzy9mPtfQCoF/Django-Juice-Wireframe?type=whiteboard&node-id=0%3A1&t=UbOvxzNJJwnR74Bz-1)**
+
+**[Link to ERD](https://dbdiagram.io/d/6492583002bd1c4a5ece5932)**
+
+**[Link to GitHub project board](https://github.com/orgs/nss-evening-cohort-E23/projects/13)**
+
+
 # React/Next.js Template
 
 [See Live Demo of this Template](https://drt-next-js-template.netlify.app/)
