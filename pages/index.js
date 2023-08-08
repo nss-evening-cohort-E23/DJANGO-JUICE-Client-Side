@@ -1,9 +1,11 @@
 import { Button } from 'react-bootstrap';
+import Link from 'next/link';
 import { signOut } from '../utils/auth';
 import { useAuth } from '../utils/context/authContext';
 
 function Home() {
   const { user } = useAuth();
+
   return (
     <div
       className="text-center d-flex flex-column justify-content-center align-content-center"
@@ -20,6 +22,10 @@ function Home() {
       <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
         Sign Out
       </Button>
+
+      <Link passHref href="/register" className="link">
+        <u>Don&apos;t have an account? Click here to sign up!</u>
+      </Link>
     </div>
   );
 }
