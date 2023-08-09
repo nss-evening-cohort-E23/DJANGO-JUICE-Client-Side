@@ -17,6 +17,7 @@ export default function ViewCart() {
     try {
       const order = await getOpenOrderByUserId(user.id);
       setOpenOrder(order);
+      console.warn(order);
     } catch (error) {
       console.error('Error fetching open order: ', error);
     }
