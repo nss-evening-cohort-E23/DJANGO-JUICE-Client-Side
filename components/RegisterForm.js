@@ -27,9 +27,14 @@ function RegisterForm({ userObj }) {
     }));
   };
 
+  const handleClick = () => {
+    console.warn('submit button was clicked');
+    router.push('/');
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    registerUser(formData).then((router.push('/')));
+    registerUser(formData).then((handleClick));
   };
 
   return (
