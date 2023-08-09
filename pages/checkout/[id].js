@@ -1,7 +1,8 @@
 // /* eslint-disable react-hooks/exhaustive-deps */
 // import React, { useEffect, useState } from 'react';
 // import { useRouter } from 'next/router';
-// // import { getSingleOrder } from '../../utils/data/orderData';
+// import CartCheckoutForm from '../../components/cart/CartCheckoutForm';
+// import { getSingleOrder } from '../../utils/data/orderData';
 
 // const Checkout = () => {
 //   const router = useRouter();
@@ -11,7 +12,7 @@
 
 //   const getOrderDetails = async () => {
 //     try {
-//       // const details = await getSingleOrder(id);
+//       const details = await getSingleOrder(id);
 //       setOrderDetials(details);
 //     } catch (error) {
 //       console.error('Error fetching order details: ', error);
