@@ -20,7 +20,7 @@ a {
 }
 
 body {
-  background-color: #88effd;
+  background-color: #FEE9D6;
 }
 
 
@@ -51,6 +51,7 @@ body {
 .past-orders-btn {
   background-color: #FDCF0F;
   border-color: #FDCF0F;
+  color: black;
 }
 
 .logout-btn {
