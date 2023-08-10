@@ -78,6 +78,7 @@ export default function ViewCart() {
       <Link passHref href={`/checkout/${openOrder.id}`}>
         <Button type="button" className="m-2">Checkout</Button>
       </Link>
+      <div />
     </>
   );
 }
