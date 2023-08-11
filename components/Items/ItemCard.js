@@ -39,7 +39,7 @@ const ItemCard = ({
           Details
         </Button>
         <Button
-          variant="success" // Choose a color that suits your design
+          variant="danger" // Choose a color that suits your design
           onClick={() => {
             router.push('/cart');
           }}
