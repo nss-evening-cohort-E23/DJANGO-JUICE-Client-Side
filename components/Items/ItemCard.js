@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable @next/next/no-img-element */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useRouter } from 'next/router';
 import { Button, Card } from 'react-bootstrap';
@@ -30,7 +30,7 @@ const ItemCard = ({
           <Card.Text>Price: ${price}</Card.Text>
         </Card.Body>
         <Button
-          variant="primary"
+          variant="warning"
           onClick={() => {
             router.push(`/items/${id}`);
           }}
@@ -51,6 +51,13 @@ const ItemCard = ({
       </Card>
     </>
   );
+};
+ItemCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
 };
 
 export default ItemCard;
