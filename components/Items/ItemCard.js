@@ -17,7 +17,7 @@ const ItemCard = ({
         className="product-card"
         style={{
           width: '15rem',
-          marginTop: '40px',
+          marginTop: '30px',
           justifyContent: 'center',
           display: 'flex',
           flexWrap: 'flex',
@@ -31,7 +31,7 @@ const ItemCard = ({
         </Card.Body>
         <>
           <Button
-            variant="primary"
+            variant="warning"
             onClick={() => {
               router.push(`/items/${id}`);
             }}
