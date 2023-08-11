@@ -1,5 +1,5 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable @next/next/no-img-element */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { useRouter } from 'next/router';
 import { Button, Card } from 'react-bootstrap';
@@ -17,7 +17,7 @@ const ItemCard = ({
         className="product-card"
         style={{
           width: '15rem',
-          marginTop: '40px',
+          marginTop: '30px',
           justifyContent: 'center',
           display: 'flex',
           flexWrap: 'flex',
@@ -30,7 +30,7 @@ const ItemCard = ({
           <Card.Text>Price: ${price}</Card.Text>
         </Card.Body>
         <Button
-          variant="primary"
+          variant="warning"
           onClick={() => {
             router.push(`/items/${id}`);
           }}
@@ -39,7 +39,7 @@ const ItemCard = ({
           Details
         </Button>
         <Button
-          variant="success" // Choose a color that suits your design
+          variant="danger" // Choose a color that suits your design
           onClick={() => {
             router.push('/cart');
           }}
@@ -51,6 +51,13 @@ const ItemCard = ({
       </Card>
     </>
   );
+};
+ItemCard.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  price: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
 };
 
 export default ItemCard;

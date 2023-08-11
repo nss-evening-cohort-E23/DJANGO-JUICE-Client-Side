@@ -21,7 +21,15 @@ const ViewItems = () => {
 
   return (
     <>
-      <div className="mt-5 d-flex flex-wrap">
+      <div
+        className="mt-5 d-flex flex-wrap"
+        style={{
+          height: '90vh',
+          padding: '30px',
+          maxWidth: '400px',
+          margin: '0 auto',
+        }}
+      >
         <div className="d-flex flex-column">
           <h3>Item Name: {productDetails.name}</h3>
           <img src={productDetails.image_url} alt="productimage" style={{ width: '200px', borderRadius: '50px' }} />
