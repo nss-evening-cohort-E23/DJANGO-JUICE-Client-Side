@@ -16,18 +16,26 @@ const ItemCard = ({
       <Card
         className="product-card"
         style={{
-          width: '15rem',
-          marginTop: '30px',
+          width: '20rem',
+          height: '35rem',
+          margin: '30px',
+          padding: '20px',
           justifyContent: 'center',
           display: 'flex',
           flexWrap: 'flex',
         }}
       >
-        <Card.Header>{name}</Card.Header>
+        <Card.Header>
+          <h1>{name}</h1>
+        </Card.Header>
         <Card.Body>
-          <img src={image} alt="postimage" style={{ width: '200px', height: '200px' }} />
-          <Card.Text>Description: {description}</Card.Text>
-          <Card.Text>Price: ${price}</Card.Text>
+          <img src={image} alt="item" style={{ width: 'auto', height: '200px' }} />
+          <Card.Text>
+            <h5>Description: {description}</h5>
+          </Card.Text>
+          <Card.Text>
+            <h4>Price: ${price}</h4>
+          </Card.Text>
         </Card.Body>
         <Button
           variant="warning"
