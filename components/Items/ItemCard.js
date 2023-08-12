@@ -49,7 +49,7 @@ const ItemCard = ({
         <Button
           variant="danger" // Choose a color that suits your design
           onClick={() => {
-            router.push('/cart');
+            router.push(`/orderitems/new/${id}`);
           }}
           style={{ marginTop: '10px' }}
         >
