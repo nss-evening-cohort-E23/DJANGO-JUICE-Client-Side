@@ -18,7 +18,7 @@ function CartItemCard({ cartItemObj, onUpdate }) {
         <h1>{cartItemObj.item_id.name}</h1>
       </Card.Header>
       <Card.Body>
-        <img src={cartItemObj.item_id.image_url} alt="item" style={{ width: 'auto', height: '200px' }} />
+        <img src={cartItemObj.item_id.image_url} alt="item" style={{ width: '22rem', height: 'auto' }} />
         <div style={{ padding: '15px' }}>
           <h3>Price: ${cartItemObj.item_id.price}</h3>
         </div>

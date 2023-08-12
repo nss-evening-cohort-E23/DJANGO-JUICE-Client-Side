@@ -16,8 +16,8 @@ const ItemCard = ({
       <Card
         className="product-card"
         style={{
-          width: '20rem',
-          height: '35rem',
+          width: '22rem',
+          height: 'auto',
           margin: '30px',
           padding: '20px',
           justifyContent: 'center',
@@ -29,9 +29,12 @@ const ItemCard = ({
           <h1>{name}</h1>
         </Card.Header>
         <Card.Body>
-          <img src={image} alt="item" style={{ width: 'auto', height: '200px' }} />
+          <div>
+            <img src={image} alt="item" style={{ width: '18rem', height: 'auto' }} />
+          </div>
+          <br />
           <Card.Text>
-            <h5>Description: {description}</h5>
+            <h5>{description}</h5>
           </Card.Text>
           <Card.Text>
             <h4>Price: ${price}</h4>
