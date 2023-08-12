@@ -13,14 +13,18 @@ function CartItemCard({ cartItemObj, onUpdate }) {
   };
 
   return (
-    <Card className="text-center cart-item-card" style={{ width: '18rem', margin: '10px' }}>
-      <Card.Header>{cartItemObj.item_id.name}</Card.Header>
+    <Card className="text-center cart-item-card" style={{ width: '25rem', margin: '15px', padding: '10px' }}>
+      <Card.Header>
+        <h1>{cartItemObj.item_id.name}</h1>
+      </Card.Header>
       <Card.Body>
-        <Card.Img src={cartItemObj.item_id.item_image_url} alt="item" />
-        <h2>Price: ${cartItemObj.item_id.price}</h2>
+        <img src={cartItemObj.item_id.image_url} alt="item" style={{ width: 'auto', height: '200px' }} />
+        <div style={{ padding: '15px' }}>
+          <h3>Price: ${cartItemObj.item_id.price}</h3>
+        </div>
       </Card.Body>
       <div>
-        <Button type="button" className="m-2" onClick={removeItem}>Remove</Button>
+        <Button type="button" className="m-2" variant="danger" onClick={removeItem}>Remove</Button>
       </div>
     </Card>
   );
@@ -33,7 +37,7 @@ CartItemCard.propTypes = {
       id: PropTypes.number,
       name: PropTypes.string,
       price: PropTypes.string,
-      item_image_url: PropTypes.string,
+      image_url: PropTypes.string,
     }),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,

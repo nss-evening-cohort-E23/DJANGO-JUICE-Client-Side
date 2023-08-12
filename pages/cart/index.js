@@ -57,16 +57,21 @@ export default function ViewCart() {
   const total = cartItems.reduce((accumulator, object) => accumulator + parseFloat(object.item_id.price), 0);
 
   return (
-    <>
-      <div className="cart-page" />
+    <div className="cart-page">
       <Head>
         <title>Cart</title>
       </Head>
-      <div className="text-center d-flex flex-column justify-content-center align-content-center">
+      <div className="text-center d-flex flex-column justify-content-center align-content-center" style={{ marginTop: '80px' }}>
         <br />
-        <h1>My Cart</h1>
+        <div style={{ display: 'flex', justifyContent: 'right' }}>
+          <h1>Order Total: </h1>
+          <h1 style={{ paddingRight: '30px', paddingLeft: '20px', color: 'darkOrange' }}> ${total}</h1>
+          <Link passHref href={`/checkout/${openOrder.id}`}>
+            <Button size="lg" type="button" variant="success" className="m-2">Checkout</Button>
+          </Link>
+        </div>
       </div>
-      <div className="cart-items-container">
+      <div className="cart-items-container" style={{ display: 'flex', flexWrap: 'wrap' }}>
         {cartItems.map((cartItem) => (
           <section key={`cartItem--${cartItem.id}`} className="order-items">
             <CartItemCard cartItemObj={cartItem} onUpdate={getCartItems} />
@@ -74,11 +79,6 @@ export default function ViewCart() {
         ))}
       </div>
       <br />
-      <h1>Order total: ${total}</h1>
-      <Link passHref href={`/checkout/${openOrder.id}`}>
-        <Button type="button" className="m-2">Checkout</Button>
-      </Link>
-      <div />
-    </>
+    </div>
   );
 }
