@@ -13,7 +13,7 @@ export default function ConfirmationPage() {
         style={{
           height: '90vh',
           padding: '30px',
-          maxWidth: '400px',
+          maxWidth: '800px',
           margin: '0 auto',
         }}
       >
