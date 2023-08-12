@@ -3,10 +3,10 @@ import { Form, InputGroup } from 'react-bootstrap';
 
 import { getItems } from '../../utils/data/itemsData';
 import ItemCard from '../../components/Items/ItemCard';
-import { useAuth } from '../../utils/context/authContext';
+// import { useAuth } from '../../utils/context/authContext';
 
 function ItemHome() {
-  const { user } = useAuth();
+  // const { user } = useAuth();
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
   console.warn(search);
@@ -19,8 +19,6 @@ function ItemHome() {
   return (
     <>
       <div className="">
-        {console.warn(products)}
-        {console.warn(user)}
         <Form>
           <InputGroup className="my-3">
             <Form.Control onChange={(e) => setSearch(e.target.value)} placeholder="Search Products" />

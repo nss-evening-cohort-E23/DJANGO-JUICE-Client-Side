@@ -11,62 +11,79 @@ import CartItemCard from '../../components/CartItemCard';
 export default function ViewCart() {
   const [openOrder, setOpenOrder] = useState({});
   const [cartItems, setCartItems] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [cartTotal, setCartTotal] = useState(0);
   const { user } = useAuth();
 
   const getOpenOrder = async () => {
     try {
       const order = await getOpenOrderByUserId(user.id);
       setOpenOrder(order);
-      console.warn(order);
     } catch (error) {
       console.error('Error fetching open order: ', error);
     }
   };
 
+  // eslint-disable-next-line consistent-return
   const getCartItems = async () => {
     try {
       const items = await getOrderItemsByOrderId(openOrder.id);
       setCartItems(items);
+      return items;
     } catch (error) {
       console.error('Error fetching cart items: ', error);
     }
   };
 
+  const getCartTotal = (items) => {
+    const total = items.reduce((accumulator, object) => accumulator + parseFloat(object.item_id.price), 0);
+    setCartTotal(total.toFixed(2));
+  };
+
   useEffect(() => {
     getOpenOrder();
     if (openOrder.id) {
-      getCartItems();
+      getCartItems().then((items) => {
+        getCartTotal(items);
+      });
     }
   }, [user.id, openOrder.id]);
 
   useEffect(() => {
-    const total = cartItems.reduce((accumulator, object) => accumulator + parseFloat(object.item_id.price).toFixed(2), 0);
+    const total = cartItems.reduce((accumulator, object) => accumulator + parseFloat(object.item_id.price), 0);
+    const roundedTotal = total.toFixed(2);
 
     if (openOrder.id) {
       const payload = {
         id: openOrder.id,
         userId: openOrder.user_id?.id,
-        total: Number(total),
+        total: Number(roundedTotal),
         isOpen: openOrder.is_open,
         timestamp: openOrder.timestamp,
       };
       updateOrder(payload);
     }
-  }, [cartItems]);
+  }, [cartItems, openOrder.id]);
 
   const total = cartItems.reduce((accumulator, object) => accumulator + parseFloat(object.item_id.price), 0);
+  const roundedTotal = total.toFixed(2);
 
   return (
-    <>
-      <div className="cart-page" />
+    <div className="cart-page">
       <Head>
         <title>Cart</title>
       </Head>
-      <div className="text-center d-flex flex-column justify-content-center align-content-center">
+      <div className="text-center d-flex flex-column justify-content-center align-content-center" style={{ marginTop: '80px' }}>
         <br />
-        <h1>My Cart</h1>
+        <div style={{ display: 'flex', justifyContent: 'right' }}>
+          <h1>Order Total: </h1>
+          <h1 style={{ paddingRight: '30px', paddingLeft: '20px', color: 'darkOrange' }}> ${roundedTotal}</h1>
+          <Link passHref href={`/checkout/${openOrder.id}`}>
+            <Button size="lg" type="button" variant="success" className="m-2">Checkout</Button>
+          </Link>
+        </div>
       </div>
-      <div className="cart-items-container">
+      <div className="cart-items-container" style={{ display: 'flex', flexWrap: 'wrap' }}>
         {cartItems.map((cartItem) => (
           <section key={`cartItem--${cartItem.id}`} className="order-items">
             <CartItemCard cartItemObj={cartItem} onUpdate={getCartItems} />
@@ -74,11 +91,6 @@ export default function ViewCart() {
         ))}
       </div>
       <br />
-      <h1>Order total: ${total}</h1>
-      <Link passHref href={`/checkout/${openOrder.id}`}>
-        <Button type="button" className="m-2">Checkout</Button>
-      </Link>
-      <div />
-    </>
+    </div>
   );
 }

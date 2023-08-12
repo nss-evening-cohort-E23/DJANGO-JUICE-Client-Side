@@ -16,18 +16,29 @@ const ItemCard = ({
       <Card
         className="product-card"
         style={{
-          width: '15rem',
-          marginTop: '30px',
+          width: '22rem',
+          height: 'auto',
+          margin: '30px',
+          padding: '20px',
           justifyContent: 'center',
           display: 'flex',
           flexWrap: 'flex',
         }}
       >
-        <Card.Header>{name}</Card.Header>
+        <Card.Header>
+          <h1>{name}</h1>
+        </Card.Header>
         <Card.Body>
-          <img src={image} alt="postimage" style={{ width: '200px', height: '200px' }} />
-          <Card.Text>Description: {description}</Card.Text>
-          <Card.Text>Price: ${price}</Card.Text>
+          <div>
+            <img src={image} alt="item" style={{ width: '18rem', height: 'auto' }} />
+          </div>
+          <br />
+          <Card.Text>
+            <h5>{description}</h5>
+          </Card.Text>
+          <Card.Text>
+            <h4>Price: ${price}</h4>
+          </Card.Text>
         </Card.Body>
         <Button
           variant="warning"
@@ -41,7 +52,7 @@ const ItemCard = ({
         <Button
           variant="danger" // Choose a color that suits your design
           onClick={() => {
-            router.push('/cart');
+            router.push(`/orderitems/new/${id}`);
           }}
           style={{ marginTop: '10px' }}
         >
