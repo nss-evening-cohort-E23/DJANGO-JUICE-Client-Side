@@ -11,13 +11,14 @@ import CartItemCard from '../../components/CartItemCard';
 export default function ViewCart() {
   const [openOrder, setOpenOrder] = useState({});
   const [cartItems, setCartItems] = useState([]);
+  // eslint-disable-next-line no-unused-vars
+  const [cartTotal, setCartTotal] = useState(0);
   const { user } = useAuth();
 
   const getOpenOrder = async () => {
     try {
       const order = await getOpenOrderByUserId(user.id);
       setOpenOrder(order);
-      console.warn(order);
     } catch (error) {
       console.error('Error fetching open order: ', error);
     }
@@ -27,34 +28,42 @@ export default function ViewCart() {
     try {
       const items = await getOrderItemsByOrderId(openOrder.id);
       setCartItems(items);
+      return items;
     } catch (error) {
       console.error('Error fetching cart items: ', error);
     }
   };
 
+  const getCartTotal = (items) => {
+    const total = items.reduce((accumulator, object) => accumulator + parseFloat(object.item_id.price), 0);
+    setCartTotal(total.toFixed(2));
+  };
+
   useEffect(() => {
     getOpenOrder();
     if (openOrder.id) {
-      getCartItems();
+      getCartItems().then((items) => {
+        getCartTotal(items);
+      });
     }
   }, [user.id, openOrder.id]);
 
   useEffect(() => {
-    const total = cartItems.reduce((accumulator, object) => accumulator + parseFloat(object.item_id.price).toFixed(2), 0);
+    const total = cartItems.reduce((accumulator, object) => accumulator + parseFloat(object.item_id.price), 0);
+
+    const roundedTotal = total.toFixed(2);
 
     if (openOrder.id) {
       const payload = {
         id: openOrder.id,
         userId: openOrder.user_id?.id,
-        total: Number(total),
+        total: Number(roundedTotal),
         isOpen: openOrder.is_open,
         timestamp: openOrder.timestamp,
       };
       updateOrder(payload);
     }
-  }, [cartItems]);
-
-  const total = cartItems.reduce((accumulator, object) => accumulator + parseFloat(object.item_id.price), 0);
+  }, [cartItems, openOrder.id]);
 
   return (
     <div className="cart-page">
@@ -65,7 +74,7 @@ export default function ViewCart() {
         <br />
         <div style={{ display: 'flex', justifyContent: 'right' }}>
           <h1>Order Total: </h1>
-          <h1 style={{ paddingRight: '30px', paddingLeft: '20px', color: 'darkOrange' }}> ${total}</h1>
+          <h1 style={{ paddingRight: '30px', paddingLeft: '20px', color: 'darkOrange' }}> ${openOrder.total}</h1>
           <Link passHref href={`/checkout/${openOrder.id}`}>
             <Button size="lg" type="button" variant="success" className="m-2">Checkout</Button>
           </Link>
