@@ -52,9 +52,9 @@ export default function CartCheckoutForm({ orderObj }) {
         userId: user.id,
         total: 0,
         isOpen: true,
-        datePlaced: dateTime,
+        timestamp: dateTime,
       };
-      console.warn(payload);
+
       createOrder(payload);
       router.push('/confirmation');
     });

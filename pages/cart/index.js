@@ -24,6 +24,7 @@ export default function ViewCart() {
     }
   };
 
+  // eslint-disable-next-line consistent-return
   const getCartItems = async () => {
     try {
       const items = await getOrderItemsByOrderId(openOrder.id);
@@ -50,7 +51,6 @@ export default function ViewCart() {
 
   useEffect(() => {
     const total = cartItems.reduce((accumulator, object) => accumulator + parseFloat(object.item_id.price), 0);
-
     const roundedTotal = total.toFixed(2);
 
     if (openOrder.id) {
@@ -65,6 +65,9 @@ export default function ViewCart() {
     }
   }, [cartItems, openOrder.id]);
 
+  const total = cartItems.reduce((accumulator, object) => accumulator + parseFloat(object.item_id.price), 0);
+  const roundedTotal = total.toFixed(2);
+
   return (
     <div className="cart-page">
       <Head>
@@ -74,7 +77,7 @@ export default function ViewCart() {
         <br />
         <div style={{ display: 'flex', justifyContent: 'right' }}>
           <h1>Order Total: </h1>
-          <h1 style={{ paddingRight: '30px', paddingLeft: '20px', color: 'darkOrange' }}> ${openOrder.total}</h1>
+          <h1 style={{ paddingRight: '30px', paddingLeft: '20px', color: 'darkOrange' }}> ${roundedTotal}</h1>
           <Link passHref href={`/checkout/${openOrder.id}`}>
             <Button size="lg" type="button" variant="success" className="m-2">Checkout</Button>
           </Link>
